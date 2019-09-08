@@ -1,0 +1,9 @@
+<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark" style="background: url(<%= @movie.image_url %>)">
+  <div class="col-md-6 px-0">
+    <h1 class="display-4 font-italic"><%= @movie.title %></h1>
+    <p class="lead my-3"><%= @movie.text %></p>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>

@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id          :bigint           not null, primary key
+#  active      :boolean          default(FALSE)
+#  description :text
+#  title       :string           default(""), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  active: false
+
+two:
+  title: MyString
+  description: MyText
+  active: false
