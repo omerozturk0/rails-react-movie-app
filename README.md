@@ -1,24 +1,22 @@
-# README
+# Installation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Pull the repo first. :)
+- Create a `.env.development` file at project directory and add following fields.
+```yaml
+SYSTEM_DB_USER=
+SYSTEM_DB_PASS=
+```
+- Run the code on your console.
+```text
+rails db:migrate && rails db:seed
+```
+- Almost ready. We'll run the servers now. Run each of the following commands in separate console windows.
+```text
+rails s 
+``` 
 
-Things you may want to cover:
+```text
+bin/webpack-dev-server 
+``` 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- You can check `http://localhost:3000` address from your browser.
