@@ -14,10 +14,10 @@ module Searchable
       self.order = params[:order].present? ? params[:order] : { created_at: :desc }
 
       model_name = controller_name.classify.constantize
-      records = model_name.page(page).per(10).order(order)
+      records = model_name.all
 
       if params[:search].present?
-        records = records.where('title LIKE ?', "%#{params[:search]}%")
+        records = records.where('movies.title LIKE ?', "%#{params[:search]}%")
       end
 
       if own_records
@@ -26,15 +26,16 @@ module Searchable
         end
       end
 
+      paginated = records.page(page).per(10).order(order)
       {
-          data: ActiveModelSerializers::SerializableResource.new(records, adapter: :json),
+          data: ActiveModelSerializers::SerializableResource.new(paginated, adapter: :json),
           aggs: {
-              Categories: model_name.joins(:category).group('categories.title').count,
-              Ratings: model_name.joins(:ratings).group('ratings.value').count
+              Categories: records.joins(:category).group('categories.title').count,
+              Ratings: records.joins(:ratings).group('ratings.value').count
           },
           links: {
-              prev: path_to_prev_page(records),
-              next: path_to_next_page(records)
+              prev: path_to_prev_page(paginated),
+              next: path_to_next_page(paginated)
           }
       }
     end
