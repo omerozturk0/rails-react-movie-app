@@ -21,12 +21,6 @@
 #
 
 class Rating < ApplicationRecord
-  after_save :reindex_movie
-
   belongs_to :user
   belongs_to :movie
-
-  def reindex_movie
-    Movie.find(self.movie_id).reindex
-  end
 end

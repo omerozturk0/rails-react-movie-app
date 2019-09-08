@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @movies, meta: { aggs: @movies.aggs } }
+      format.json { render json: @movies }
     end
   end
 
@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @movies, meta: { aggs: @movies.aggs } }
+      format.json { render json: @movies }
     end
   end
 

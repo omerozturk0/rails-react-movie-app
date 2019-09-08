@@ -29,20 +29,20 @@ class MovieItem extends Component {
                 <div
                     className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div className="col p-4 d-flex flex-column position-static">
-                        <strong className="d-inline-block mb-2 text-primary">{movie.attributes.category.title}</strong>
-                        <h3 className="mb-0">{movie.attributes.title}</h3>
-                        <div className="mb-1 text-muted">{movie.attributes['created-at-short']}</div>
-                        <p className="card-text mb-auto">{movie.attributes.text}</p>
+                        <strong className="d-inline-block mb-2 text-primary">{movie.category.title}</strong>
+                        <h3 className="mb-0">{movie.title}</h3>
+                        <div className="mb-1 text-muted">{movie.created_at_short}</div>
+                        <p className="card-text mb-auto">{movie.text}</p>
                         <div className="card-text mb-auto text-right">
                             <StarRatingComponent
                                 name={"rating_" + movie.id}
-                                value={parseInt(movie.attributes['avg-ratings'])}
+                                value={parseInt(movie.avg_ratings)}
                                 onStarClick={this.starClicked}
                             />
                         </div>
                     </div>
                     <div className="col-auto d-none d-lg-block">
-                        <img src={movie.attributes['image-url'] + '?random=' + movie.id} className="card-img-top"/>
+                        <img src={movie.image_url + '?random=' + movie.id} className="card-img-top"/>
                     </div>
                 </div>
             </div>

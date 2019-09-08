@@ -35,9 +35,9 @@ class SideBar extends Component {
                             <h3 className="pb-4 font-italic border-bottom">{this.parseTitleize(item)}</h3>
                             <ol className="list-unstyled mb-0">
                                 {
-                                    movies.aggs[item].buckets.map(bucket =>
+                                    Object.keys(movies.aggs[item]).map(bucket =>
                                         <li key={item + uuid()}>
-                                            <a href="#">{this.parseStar(bucket.key)} <span>({bucket['doc-count']})</span></a>
+                                            <a href="#">{this.parseStar(bucket)} <span>({movies.aggs[item][bucket]})</span></a>
                                         </li>
                                     )
                                 }

@@ -27,15 +27,4 @@ class Movie < ApplicationRecord
   belongs_to :category
   belongs_to :user
   has_many :ratings
-
-  searchkick word_start: %i[title text], settings: {number_of_shards: 1, number_of_replicas: 0}
-
-  def search_data
-    attributes.merge(
-        category: category,
-        user: user,
-        ratings: ratings,
-        avg_ratings: ratings.average(:value).to_f
-    )
-  end
 end

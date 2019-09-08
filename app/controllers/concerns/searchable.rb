@@ -1,47 +1,42 @@
 module Searchable
   extend ActiveSupport::Concern
+  include Kaminari::Helpers::HelperMethods
 
   module ClassMethods
   end
 
   module InstanceMethods
-    attr_accessor :search
-    attr_accessor :options
-    attr_accessor :conditions
+    attr_accessor :page
+    attr_accessor :order
 
     def searchable(own_records = false)
-      self.conditions = {}
-      self.search = params[:search].present? ? params[:search] : '*'
-      self.options = {
-          page: params[:page].present? ? params[:page][:number] : 1,
-          per_page: params[:page].present? ? params[:page][:size] : 10,
-          aggs: {
-              Categories: {
-                  field: 'category.title',
-                  order: { '_key': 'asc' }
-              },
-              Ratings: {
-                  field: 'ratings.value',
-                  order: { '_key': 'asc' }
-              }
-          },
-          order: { avg_ratings: :desc }
-      }
+      self.page = params[:page].present? ? params[:page] : 1
+      self.order = params[:order].present? ? params[:order] : { created_at: :desc }
+
+      model_name = controller_name.classify.constantize
+      records = model_name.page(page).per(10).order(order)
+
+      if params[:search].present?
+        records = records.where('title LIKE ?', "%#{params[:search]}%")
+      end
 
       if own_records
         if user_signed_in?
-          conditions[:user_id] = current_user.id
+          records = records.where(user_id: current_user.id)
         end
-
-        if conditions.any?
-          options[:where] = conditions
-        end
-
-        options[:order] = { created_at: :desc }
       end
 
-      model_name = controller_name.classify.constantize
-      model_name.search(search, options)
+      {
+          data: ActiveModelSerializers::SerializableResource.new(records, adapter: :json),
+          aggs: {
+              Categories: model_name.joins(:category).group('categories.title').count,
+              Ratings: model_name.joins(:ratings).group('ratings.value').count
+          },
+          links: {
+              prev: path_to_prev_page(records),
+              next: path_to_next_page(records)
+          }
+      }
     end
   end
 

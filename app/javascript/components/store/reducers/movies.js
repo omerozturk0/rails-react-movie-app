@@ -17,9 +17,9 @@ export default (state = initialState, { type, payload }) => {
         case 'FETCH_MOVIES_FULFILLED':
             return {
                 ...state,
-                movies: payload.data.data,
+                movies: payload.data.data.movies,
                 links: payload.data.links,
-                aggs: payload.data.meta.aggs,
+                aggs: payload.data.aggs,
                 fetched: true
             }
 
