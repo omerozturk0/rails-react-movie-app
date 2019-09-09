@@ -19,7 +19,7 @@ const store = createStore(
 document.addEventListener('turbolinks:load', function () {
     Turbolinks.start()
 
-    const dom = document.querySelector("movie-list")
+    const dom = document.getElementById("movie-list")
 
     if (dom) {
         ReactDom.render(
