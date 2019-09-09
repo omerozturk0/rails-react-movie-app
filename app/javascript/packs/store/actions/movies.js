@@ -1,5 +1,8 @@
-import axios from "../../axios";
+import axios from 'axios';
 import qs from 'qs';
+
+const csrfToken = document.querySelector("meta[name=csrf-token]").content
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
 
 export function fetchMovies(apiPath, params = {}) {
     let path = apiPath === '/' ? '/movies' : apiPath
