@@ -29,7 +29,7 @@ document.addEventListener('turbolinks:load', function () {
                     <App />
                 </Provider>
             </BrowserRouter>,
-            document.querySelector("movie-list")
+            dom
         )
     }
 })
