@@ -15,5 +15,9 @@ module MovieApp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.react.server_renderer_options = {
+      files: ["server_rendering.js"]
+    }
   end
 end
