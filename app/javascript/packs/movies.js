@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 import reduxPromise from 'redux-promise-middleware';
 import rootReducer from "./store/rootReducer";
 import { BrowserRouter } from 'react-router-dom';
+import Turbolinks from 'turbolinks';
 
 import App from './components/App'
 
@@ -17,18 +18,17 @@ const store = createStore(
     )
 )
 
-class Movies extends React.Component {
-  render () {
-    return (
-      <React.Fragment>
-        <BrowserRouter>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </BrowserRouter>
-      </React.Fragment>
-    );
-  }
-}
+document.addEventListener('turbolinks:load', function () {
+    const dom = document.querySelector("movie-list")
 
-export default Movies
+    if (dom) {
+        ReactDom.render(
+            <BrowserRouter>
+                <Provider store={store}>
+                    <App />
+                </Provider>
+            </BrowserRouter>,
+            document.querySelector("movie-list")
+        )
+    }
+})
