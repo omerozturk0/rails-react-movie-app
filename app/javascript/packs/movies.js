@@ -1,4 +1,5 @@
 import React from "react"
+import ReactDOM from 'react-dom';
 import PropTypes from "prop-types"
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -22,7 +23,7 @@ document.addEventListener('turbolinks:load', function () {
     const dom = document.getElementById("movie-list")
 
     if (dom) {
-        ReactDom.render(
+        ReactDOM.render(
             <BrowserRouter>
                 <Provider store={store}>
                     <App />
