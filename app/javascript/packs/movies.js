@@ -12,10 +12,8 @@ import App from './components/App'
 
 const store = createStore(
     rootReducer,
-    compose(
-        applyMiddleware(reduxPromise, thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+    applyMiddleware(reduxPromise, thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 document.addEventListener('turbolinks:load', function () {
