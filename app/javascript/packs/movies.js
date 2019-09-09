@@ -11,10 +11,11 @@ import Turbolinks from 'turbolinks';
 
 import App from './components/App'
 
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
     rootReducer,
-    applyMiddleware(reduxPromise, thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancer(applyMiddleware(reduxPromise, thunk))
 )
 
 document.addEventListener('turbolinks:load', function () {
