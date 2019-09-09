@@ -7,7 +7,7 @@ class MoviesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit movies_url
-    assert_selector "h1", text: "Movies"
+    assert_selector "h1", text: "MoviesJs"
   end
 
   test "creating a Movie" do

@@ -21,9 +21,9 @@
 
   <div class="nav-scroller py-1 mb-4">
     <nav class="nav d-flex justify-content-between">
-      <%= active_link_to 'Explore Movies', root_path, active: :exclusive, class: 'p-2 text-muted' %>
+      <%= active_link_to 'Explore MoviesJs', root_path, active: :exclusive, class: 'p-2 text-muted' %>
       <% if user_signed_in? %>
-        <%= active_link_to 'Your Movies', own_movies_path, active: :exclusive, class: 'p-2 text-muted' %>
+        <%= active_link_to 'Your MoviesJs', own_movies_path, active: :exclusive, class: 'p-2 text-muted' %>
         <%= active_link_to 'New Movie', new_movie_path, active: :exclusive, class: 'p-2 text-muted' %>
         <%= active_link_to 'New Category', new_category_path, active: :exclusive, class: 'p-2 text-muted' %>
       <% end %>
